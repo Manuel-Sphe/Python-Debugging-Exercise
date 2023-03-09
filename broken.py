@@ -1,7 +1,9 @@
-def quick_sort(numbers):
-   quick_sort_helper(numbers, 0, len(numbers)-1)
+from typing import List
 
-def quick_sort_helper(numbers, first, last):
+def quick_sort(numbers:List):
+   quick_sort_helper( numbers, 0, len(numbers)-1)
+
+def quick_sort_helper(numbers:List, first:int, last:int)->None:
    if first<last:
 
        splitpoint = partition(numbers, first, last)
@@ -10,31 +12,26 @@ def quick_sort_helper(numbers, first, last):
        quick_sort_helper(numbers, splitpoint+1, last)
 
 
-def partition(numbers, first, last):
+def partition(numbers:int, first:int, last:int)->int:
    pivotvalue = numbers[first]
 
-   leftmark = first+1
+   leftmark =  first 
    rightmark = last
 
    done = False
    while not done:
+    while leftmark <= rightmark and numbers[leftmark] <= pivotvalue:
+           leftmark = leftmark + 1
 
-       while leftmark <= rightmark and numbers[leftmark] <= pivotvalue:
-           leftmark = rightmark + 1
+    while numbers[rightmark] >= pivotvalue and rightmark >= leftmark:
+        rightmark = rightmark -1
 
-       while numbers[rightmark] >= pivotvalue and rightmark >= leftmark:
-           rightmark = leftmark -1
-
-       if rightmark < leftmark -1:
-           done = True
-       else:
-           temp = numbers[leftmark]
-           numbers[leftmark] = numbers[rightmark]
-           numbers[rightmark] = temp
-
-   temp = numbers[first]
-   numbers[first] = numbers[rightmark]
-   numbers[rightmark] = temp
+    if rightmark <= leftmark :
+        done = True
+    else:
+        numbers[leftmark], numbers[rightmark] = numbers[rightmark], numbers[leftmark] # swap
+    # undo the swap
+    numbers[first] , numbers[rightmark] = numbers[rightmark], numbers[first]
 
    return rightmark
 
