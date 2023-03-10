@@ -15,7 +15,7 @@ def quick_sort_helper(numbers:List, first:int, last:int)->None:
 def partition(numbers:int, first:int, last:int)->int:
    pivotvalue = numbers[first]
 
-   leftmark =  first 
+   leftmark =  first + 1
    rightmark = last
 
    done = False
